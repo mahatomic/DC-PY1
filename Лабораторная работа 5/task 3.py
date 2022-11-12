@@ -4,12 +4,11 @@ from random import randint
 def get_unique_list_numbers(start, stop, count) -> list[int]:
 
     unique_list = []
-    while True:
+    while len(unique_list) < count:
         number = randint(start, stop)
         if number not in unique_list:
             unique_list.append(number)
-        if len(unique_list) == count:
-            break
+
     return unique_list
 
 
