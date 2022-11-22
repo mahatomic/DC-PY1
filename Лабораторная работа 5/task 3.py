@@ -2,7 +2,9 @@ from random import randint
 
 
 def get_unique_list_numbers(start, stop, count) -> list[int]:
-
+    if stop - start <= count:
+    raise ValueError
+    
     unique_list = []
     while len(unique_list) < count:
         number = randint(start, stop)
