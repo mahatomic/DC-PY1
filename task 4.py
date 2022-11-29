@@ -3,18 +3,16 @@ import json
 INPUT_FILE = "input.csv"
 
 
-def csv_to_list_dict(file) -> list[dict]:
+def csv_to_list_dict(file, delimiter=",") -> list[dict]:
     with open(file) as f:
-        data = f.readlines()
-        data = [line.rstrip() for line in data]
+        headlines_str = f.readline()
+        headlines_list = headlines_str.rstrip().split(delimiter)
 
-    list_of_lists = [val.split(",") for val in data]
-
-    headlines_list = list_of_lists[0]
-    list_dict = []
-    for string in list_of_lists[1:]:
-        dict_ = {headlines_list[element]: string[element] for element in range(len(headlines_list))}
-        list_dict.append(dict_)
+        list_dict = []
+        for string in f:
+            val = string.rstrip().split(delimiter)
+            dict_ = {key: value for key, value in zip(headlines_list, val)}
+            list_dict.append(dict_)
 
     return list_dict
 
